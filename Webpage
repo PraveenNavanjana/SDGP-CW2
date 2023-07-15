@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Paragraph Summarizer</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #summary {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // Function to summarize the whole paragraph
+        function summarizeParagraph() {
+            var paragraph = document.getElementById("input").value;
+            $.post("summarize.php", { text: paragraph }, function(data) {
+                document.getElementById("summary").innerText = data;
+            });
+        }
+        
+        // Function to summarize a specific word
+        function summarizeWord() {
+            var paragraph = document.getElementById("input").value;
+            var word = document.getElementById("word").value;
+            $.post("summarize.php", { text: paragraph, keyword: word }, function(data) {
+                document.getElementById("summary").innerText = data;
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Paragraph Summarizer</h1>
+    <p>Enter a paragraph:</p>
+    <textarea id="input"></textarea>
+    <p>Enter a specific word (optional):</p>
+    <input type="text" id="word">
+    <br><br>
+    <button onclick="summarizeParagraph()">Summarize Paragraph</button>
+    <button onclick="summarizeWord()">Summarize Specific Word</button>
+    <div id="summary"></div>
+</body>
+<footer>
+
+    
+</footer>
+</html>
