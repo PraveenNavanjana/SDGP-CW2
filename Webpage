@@ -3,6 +3,59 @@
 <head>
     <title>Paragraph Summarizer</title>
     <style>
+
+    /* Header bar styling */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f2f2f2;
+      padding: 10px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .navigation {
+      display: flex;
+      align-items: center;
+    }
+
+    .navigation ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .navigation li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
         /* Add some basic styling */
         body {
             font-family: Arial, sans-serif;
@@ -46,6 +99,25 @@
     </script>
 </head>
 <body>
+
+<div class="header">
+        <div class="logo">
+          <img src="logo.png" alt="Algo Flex Logo">
+          <h1>Algo Flex</h1>
+        </div>
+        <div class="navigation">
+          <ul>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/about">About Us</a></li>
+          </ul>
+        </div>
+        <div class="profile">
+          <img src="avatar.png" alt="User Avatar">
+          <a href="/login">Login</a> | <a href="/logout">Logout</a>
+        </div>
+      </div>
+
     <h1>Paragraph Summarizer</h1>
     <p>Enter a paragraph:</p>
     <textarea id="input"></textarea>
@@ -57,7 +129,26 @@
     <div id="summary"></div>
 </body>
 <footer>
-
+<div class="container">
+          <div class="footer-content">
+            <div class="footer-left">
+              <h4>Algo Flex</h4>
+              <p>A web summarization web application</p>
+            </div>
+            <div class="footer-right">
+              <ul class="social-media-links">
+                <li><a href="https://www.facebook.com/YourFBPage" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.linkedin.com/company/YourLinkedinLearningPage" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://www.instagram.com/YourInstagramPage" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.twitter.com/YourTwitterPage" target="_blank"><i class="fab fa-twitter"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>Version 1.0</p>
+            <p>&copy; 2023 Algo Flex. All rights reserved.</p>
+          </div>
+        </div>
     
 </footer>
 </html>
