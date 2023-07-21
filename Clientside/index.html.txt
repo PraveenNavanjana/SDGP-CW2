@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+    <title>Paragraph Summarizer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        // Function to summarize the whole paragraph
+        function summarizeParagraph() {
+            var paragraph = document.getElementById("input").value;
+            $.post("summarize.php", { text: paragraph }, function(data) {
+                document.getElementById("summary").innerText = data;
+            });
+        }
+        
+        // Function to summarize a specific word
+        function summarizeWord() {
+            var paragraph = document.getElementById("input").value;
+            var word = document.getElementById("word").value;
+            $.post("summarize.php", { text: paragraph, keyword: word }, function(data) {
+                document.getElementById("summary").innerText = data;
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div class="header">
+        <div class="logo">
+          <img src="logo.png" alt="Algo Flex Logo">
+          <h1>Algo Flex</h1>
+        </div>
+        <div class="navigation">
+          <ul>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/about">About Us</a></li>
+          </ul>
+        </div>
+        <div class="profile">
+          <img src="avatar.png" alt="User Avatar">
+          <a href="/login">Login</a> | <a href="/logout">Logout</a>
+        </div>
+      </div>
+
+    <h1>Paragraph Summarizer</h1>
+    <p>Enter a paragraph:</p>
+    <textarea id="input"></textarea>
+    <p>Enter a specific word (optional):</p>
+    <input type="text" id="word">
+    <br><br>
+    <button onclick="summarizeParagraph()">Summarize Paragraph</button>
+    <button onclick="summarizeWord()">Summarize Specific Word</button>
+    <div id="summary"></div>
+</body>
+<footer>
+<div class="container">
+          <div class="footer-content">
+            <div class="footer-left">
+              <h4>Algo Flex</h4>
+              <p>A web summarization web application</p>
+            </div>
+            <div class="footer-right">
+              <ul class="social-media-links">
+                <li><a href="https://www.facebook.com/YourFBPage" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.linkedin.com/company/YourLinkedinLearningPage" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://www.instagram.com/YourInstagramPage" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.twitter.com/YourTwitterPage" target="_blank"><i class="fab fa-twitter"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>Version 1.0</p>
+            <p>&copy; 2023 Algo Flex. All rights reserved.</p>
+          </div>
+        </div>
+    
+</footer>
+</html>
