@@ -63,10 +63,14 @@
         }
         button {
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #4c8baf;
             color: white;
             border: none;
             cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        button:hover {
+          background-color: #3c698d;
         }
         #summary {
             border: 1px solid #ccc;

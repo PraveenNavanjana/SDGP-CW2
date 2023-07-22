@@ -1,5 +1,9 @@
+import logging
 from flask import Flask, render_template, request, jsonify
 from transformers import pipeline
+
+# Configure logging to show model download progress
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__, template_folder='clientside', static_folder='clientside')
 
@@ -31,7 +35,6 @@ def summarize():
     summary = text_summarization(input_text)
 
     return jsonify({'summary': summary})
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
