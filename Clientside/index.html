@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!--<link rel="stylesheet" href="style.css">-->
   <link rel="stylesheet" href="style.css">
     <title>Paragraph Summarizer</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -27,7 +28,8 @@
 
 <div class="header">
         <div class="logo">
-          <img src="logo.png" alt="Algo Flex Logo">
+          <!--<img src="images/logo.png" alt="Algo Flex Logo">-->
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Algo Flex Logo">
           <h1>Algo Flex</h1>
         </div>
         <div class="navigation">
@@ -38,7 +40,8 @@
           </ul>
         </div>
         <div class="profile">
-          <img src="avatar.png" alt="User Avatar">
+          <!--<img src="images/avatar.png" alt="User Avatar">-->
+          <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="User Avatar">
           <a href="/login">Login</a> | <a href="/logout">Logout</a>
         </div>
       </div>
