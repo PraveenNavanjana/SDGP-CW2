@@ -1,54 +1,37 @@
-pip install transformers
-from transformers import T5Tokenizer, T5ForConditionalGeneration, T5Config
-import torch
+from flask import Flask, render_template, request, jsonify
+from transformers import pipeline
 
-# Load pre-trained T5 model and tokenizer
-model_name = 't5-base'
-tokenizer = T5Tokenizer.from_pretrained(model_name)
-model = T5ForConditionalGeneration.from_pretrained(model_name)
+app = Flask(__name__, template_folder='clientside', static_folder='clientside')
 
-# Load and preprocess your labeled dataset
-dataset = [...]  # Load or create your labeled dataset
+def text_summarization(text, model_name="sshleifer/distilbart-cnn-12-6", max_length=150, min_length=30):
+    summarizer = pipeline("summarization", model=model_name, tokenizer=model_name)
+    summary = summarizer(text, max_length=max_length, min_length=min_length, do_sample=True)
+    return summary[0]['summary_text']
 
-# Tokenize and process the dataset
-inputs = tokenizer.prepare_seq2seq_batch(dataset, padding=True, truncation=True, return_tensors='pt')
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-# Fine-tune the model on your dataset
-optimizer = torch.optim.AdamW(model.parameters(), lr=1e-5)
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model.to(device)
+@app.route('/summarize', methods=['POST'])
+def summarize():
+    if request.headers['Content-Type'] == 'application/json':
+        data = request.json
+    else:
+        data = request.form
 
-# Set the model to training mode
-model.train()
+    paragraph = data['text']
+    word = data.get('keyword')
 
-# Training loop
-num_epochs = 5
-for epoch in range(num_epochs):
-    optimizer.zero_grad()
-    inputs = inputs.to(device)
-    outputs = model(**inputs)
-    loss = outputs.loss
-    loss.backward()
-    optimizer.step()
-    print(f'Epoch: {epoch + 1}, Loss: {loss.item()}')
+    # Preprocess the input text
+    if word:
+        input_text = f"Summarize the paragraph containing the word '{word}': {paragraph}"
+    else:
+        input_text = f"Summarize the paragraph: {paragraph}"
 
-# Save the fine-tuned model
-model.save_pretrained('fine_tuned_model')
-# Load the fine-tuned model
-model = T5ForConditionalGeneration.from_pretrained('fine_tuned_model')
-tokenizer = T5Tokenizer.from_pretrained('fine_tuned_model')
+    summary = text_summarization(input_text)
 
-# Prepare input text for inference
-input_text = '...'  # Provide the input text for summarization
-inputs = tokenizer.prepare_seq2seq_batch([input_text], padding=True, truncation=True, return_tensors='pt')
+    return jsonify({'summary': summary})
 
-# Set the model to evaluation mode
-model.eval()
 
-# Generate the summary
-inputs = inputs.to(device)
-generated_ids = model.generate(inputs['input_ids'], num_beams=4, max_length=100, early_stopping=True)
-summary = tokenizer.decode(generated_ids[0], skip_special_tokens=True)
-
-# Print the generated summary
-print('Generated Summary:', summary)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000, debug=True)
