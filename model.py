@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__, template_folder='clientside', static_folder='clientside')
 
-def text_summarization(text, model_name="sshleifer/distilbart-cnn-12-6", max_length=150, min_length=30):
+def text_summarization(text, model_name="sshleifer/distilbart-cnn-12-6", max_length=200, min_length=50):
     summarizer = pipeline("summarization", model=model_name, tokenizer=model_name)
     summary = summarizer(text, max_length=max_length, min_length=min_length, do_sample=True)
     return summary[0]['summary_text']
