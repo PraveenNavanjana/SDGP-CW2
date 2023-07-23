@@ -3,6 +3,7 @@
 <head>
   <!--<link rel="stylesheet" href="style.css">-->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="style.css">
     <script src="{{ url_for('static', filename='main.js') }}"></script>
     <title>Paragraph Summarizer</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -31,7 +32,7 @@
         <div class="logo">
           <!--<img src="images/logo.png" alt="Algo Flex Logo">-->
           <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Algo Flex Logo">
-          <h1>Algo Flex</h1>
+          <h1>DocSearchBar</h1>
         </div>
         <div class="navigation">
           <ul>
@@ -43,23 +44,33 @@
         <div class="profile">
           <!--<img src="images/avatar.png" alt="User Avatar">-->
           <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="User Avatar">
-          <a href="/login">Login</a> | <a href="/logout">Logout</a>
+          <a href="/login">Signin</a> | <a href="/logout">Signout</a>
         </div>
       </div>
 
     <h1>Paragraph Summarizer</h1>
-    <p>Enter a paragraph:</p>
-    <textarea id="input"></textarea>
-    <p>Enter a specific word (optional):</p>
-    <input type="text" id="word">
-    <br><br>
+    <div class="Specificword"> <!--<p>Enter a specific word (optional):</p>-->
+      <input type="text" id="word" placeholder="Enter a specific word (optional)"size="23">
+    </div>
+      <div class="container">
+        <p>Enter a paragraph:</p>
+        <div>
+        <div class="Input">
+            <textarea id="input"></textarea>
+        </div>
+        
+        <div class="Output">
+            <div id="summary">Summarized text will be shown here</div>
+        </div>
+        </div>
+        </div> 
     <button onclick="summarizeParagraph()">Summarize Paragraph</button>
     <button onclick="summarizeWord()">Summarize Specific Word</button>
-    <div id="summary"></div>
+<br><br>
 
     <div class="footer">
       <p class="footer-text">Summarize any text with a single click</p>
-      <p>XSummify: Instantly condense articles,papers, or documents to key points. Our AI uses natural language processing to <br> find vital info while preserving context.</p>
+      <p>Unlock insights effortlessly with our advanced Summarizer Web. Simplify complex content. Save time, understand more.</p>
     </div>
 </body>
 
